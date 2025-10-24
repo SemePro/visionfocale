@@ -1,6 +1,6 @@
 # 📸 VisionFocale - Studio Photographie & Infographie
 
-Site web moderne et professionnel pour **VisionFocale**, studio de photographie et infographie basé à Lomé, Togo.
+Site web moderne et professionnel pour **VisionFocale**, studio de photographie et infographie basé à Lomé, TG
 
 ## 🎯 Vue d'ensemble
 
