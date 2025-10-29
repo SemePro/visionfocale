@@ -132,6 +132,11 @@ const AdvancedPhotoEditor: React.FC<AdvancedPhotoEditorProps> = ({
   const [brushSize, setBrushSize] = useState(20);
   const [brushOpacity, setBrushOpacity] = useState(100);
 
+  // Wrapper function for tool change to match expected signature
+  const handleToolChange = (tool: string) => {
+    setSelectedTool(tool as 'brush' | 'eraser' | 'clone' | 'heal' | 'select' | 'move');
+  };
+
   const [editState, setEditState] = useState<EditState>({
     // Ajustements de base
     brightness: 0,
@@ -793,7 +798,7 @@ const AdvancedPhotoEditor: React.FC<AdvancedPhotoEditorProps> = ({
                     <RetouchingTools
                       canvasRef={canvasRef}
                       selectedTool={selectedTool}
-                      onToolChange={setSelectedTool}
+                      onToolChange={handleToolChange}
                       brushSize={brushSize}
                       onBrushSizeChange={setBrushSize}
                       brushOpacity={brushOpacity}
@@ -1346,7 +1351,7 @@ const AdvancedPhotoEditor: React.FC<AdvancedPhotoEditorProps> = ({
                     <RetouchingTools
                       canvasRef={canvasRef}
                       selectedTool={selectedTool}
-                      onToolChange={setSelectedTool}
+                      onToolChange={handleToolChange}
                       brushSize={brushSize}
                       onBrushSizeChange={setBrushSize}
                       brushOpacity={brushOpacity}
