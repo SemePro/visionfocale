@@ -112,7 +112,8 @@ interface EditState {
 
 interface HistoryItem {
   state: Omit<EditState, 'history'>;
-  action: string;
+  action?: string;
+  canvasData?: string;
   timestamp: number;
 }
 
