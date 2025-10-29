@@ -102,7 +102,7 @@ interface EditState {
   blendingMode: string;
   
   // Layers
-  layers: { id: string; name: string; opacity: number; blendMode: string; visible: boolean; locked: boolean; type: 'image' | 'text' | 'shape' | 'adjustment'; imageData?: string; text?: string; shape?: 'rectangle' | 'circle' | 'star'; }[];
+  layers: { id: string; name: string; opacity: number; blendMode: string; visible: boolean; locked: boolean; type: 'image' | 'text' | 'shape' | 'adjustment'; imageData?: string; imageUrl?: string; text?: string; shape?: 'rectangle' | 'circle' | 'star'; }[];
   activeLayer: number;
   
   // Historique
@@ -199,6 +199,7 @@ const AdvancedPhotoEditor: React.FC<AdvancedPhotoEditorProps> = ({
       };
       img.src = imageUrl;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageUrl]);
 
   // Sauvegarder l'état dans l'historique
@@ -403,6 +404,7 @@ const AdvancedPhotoEditor: React.FC<AdvancedPhotoEditorProps> = ({
     if (!isLoading) {
       applyFilters();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editState, isLoading, isFullscreen]);
 
   // Redimensionner automatiquement quand la fenêtre change
@@ -415,6 +417,7 @@ const AdvancedPhotoEditor: React.FC<AdvancedPhotoEditorProps> = ({
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   // Undo/Redo

@@ -45,6 +45,25 @@ const CurvesAdjustment: React.FC<CurvesAdjustmentProps> = ({
     { id: 'b', label: 'Bleu', color: '#0000ff' }
   ];
 
+  const drawCurve = useCallback((ctx: CanvasRenderingContext2D, points: number[], color: string, width: number, height: number) => {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    points.forEach((point, index) => {
+      const x = (width / (points.length - 1)) * index;
+      const y = height - (point / 255) * height;
+      
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+
+    ctx.stroke();
+  }, []);
+
   const drawCurves = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -106,30 +125,11 @@ const CurvesAdjustment: React.FC<CurvesAdjustmentProps> = ({
       ctx.arc(x, y, 4, 0, 2 * Math.PI);
       ctx.fill();
     });
-  }, [curves, activeChannel]);
+  }, [curves, activeChannel, channels, drawCurve]);
 
   useEffect(() => {
     drawCurves();
   }, [drawCurves]);
-
-  const drawCurve = (ctx: CanvasRenderingContext2D, points: number[], color: string, width: number, height: number) => {
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-
-    points.forEach((point, index) => {
-      const x = (width / (points.length - 1)) * index;
-      const y = height - (point / 255) * height;
-      
-      if (index === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-      }
-    });
-
-    ctx.stroke();
-  };
 
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
