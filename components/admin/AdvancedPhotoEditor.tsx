@@ -24,7 +24,6 @@ import {
   Redo,
   Crop,
   Layers,
-  Mask,
   Brush,
   Eraser,
   Wand2,

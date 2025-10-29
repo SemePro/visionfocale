@@ -80,19 +80,6 @@ const PhotoEditor: React.FC<PhotoEditorProps> = ({
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
 
-  // Charger l'image
-  useEffect(() => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      imageRef.current = img;
-      setIsLoading(false);
-      applyFilters();
-      saveToHistory();
-    };
-    img.src = imageUrl;
-  }, [imageUrl]);
-
   // Sauvegarder dans l'historique
   const saveToHistory = useCallback(() => {
     const canvas = canvasRef.current;
@@ -157,6 +144,19 @@ const PhotoEditor: React.FC<PhotoEditorProps> = ({
     // Restaurer le contexte
     ctx.restore();
   }, [editState]);
+
+  // Charger l'image
+  useEffect(() => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      imageRef.current = img;
+      setIsLoading(false);
+      applyFilters();
+      saveToHistory();
+    };
+    img.src = imageUrl;
+  }, [imageUrl, applyFilters, saveToHistory]);
 
   // Mettre à jour les filtres quand l'état change
   useEffect(() => {

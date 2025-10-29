@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { 
   Brush, 
   Eraser, 
@@ -73,6 +73,7 @@ const RetouchingTools: React.FC<RetouchingToolsProps> = ({
   }, [canvasRef]);
 
   // Attacher les événements au canvas
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
