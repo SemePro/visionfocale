@@ -829,7 +829,31 @@ const AdvancedPhotoEditor: React.FC<AdvancedPhotoEditorProps> = ({
                   <div className="space-y-3">
                     <PresetsPanel
                       onApplyPreset={(preset) => {
-                        setEditState(prev => ({ ...prev, ...preset }));
+                        setEditState(prev => ({
+                          ...prev,
+                          ...preset.settings,
+                          signature: preset.settings.signature,
+                          signatureOpacity: preset.settings.signatureOpacity
+                        }));
+                      }}
+                      onSavePreset={(preset) => {
+                        console.log('Saving preset:', preset);
+                      }}
+                      onDeletePreset={(presetId) => {
+                        console.log('Deleting preset:', presetId);
+                      }}
+                      currentSettings={{
+                        brightness: editState.brightness,
+                        contrast: editState.contrast,
+                        saturation: editState.saturation,
+                        hue: editState.hue,
+                        skinSmoothing: editState.skinSmoothing,
+                        eyeBrightening: editState.eyeBrightening,
+                        vignette: editState.vignette,
+                        grain: editState.grain,
+                        artisticFilter: editState.artisticFilter,
+                        signature: editState.signature,
+                        signatureOpacity: editState.signatureOpacity
                       }}
                     />
                   </div>
