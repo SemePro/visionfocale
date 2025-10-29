@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { 
   TrendingUp, 
   Palette, 
@@ -38,12 +38,12 @@ const CurvesAdjustment: React.FC<CurvesAdjustmentProps> = ({
   const [activeChannel, setActiveChannel] = useState<'r' | 'g' | 'b' | 'rgb'>('rgb');
   const [draggedPoint, setDraggedPoint] = useState<number | null>(null);
 
-  const channels = [
+  const channels = useMemo(() => [
     { id: 'rgb', label: 'RGB', color: '#ffffff' },
     { id: 'r', label: 'Rouge', color: '#ff0000' },
     { id: 'g', label: 'Vert', color: '#00ff00' },
     { id: 'b', label: 'Bleu', color: '#0000ff' }
-  ];
+  ], []);
 
   const drawCurve = useCallback((ctx: CanvasRenderingContext2D, points: number[], color: string, width: number, height: number) => {
     ctx.strokeStyle = color;

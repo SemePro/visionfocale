@@ -123,7 +123,7 @@ const AdvancedPhotoEditor: React.FC<AdvancedPhotoEditorProps> = ({
   onClose,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeTab, setActiveTab] = useState<'adjust' | 'portrait' | 'advanced' | 'creative' | 'layers' | 'presets' | 'history' | 'passport'>('adjust');
