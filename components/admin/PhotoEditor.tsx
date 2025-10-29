@@ -60,7 +60,7 @@ const PhotoEditor: React.FC<PhotoEditorProps> = ({
   originalImageUrl 
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeTab, setActiveTab] = useState<'adjust' | 'filters' | 'crop'>('adjust');
