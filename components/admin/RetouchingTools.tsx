@@ -73,7 +73,6 @@ const RetouchingTools: React.FC<RetouchingToolsProps> = ({
   }, [canvasRef]);
 
   // Attacher les événements au canvas
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -89,6 +88,7 @@ const RetouchingTools: React.FC<RetouchingToolsProps> = ({
       canvas.removeEventListener('mouseup', handleMouseUp);
       canvas.removeEventListener('mouseleave', handleMouseUp);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTool, brushSize, brushOpacity, isDrawing, lastPoint, sourcePoint, brushColor, eraserColor, eraserMode, selection, selectionStart]);
 
   const getCanvasCoordinates = (e: MouseEvent): { x: number; y: number } => {

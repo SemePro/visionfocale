@@ -82,7 +82,7 @@ interface EditState {
   shadowAdjustment: number;
   
   // Fonctionnalités avancées
-  curves: { r: number[]; g: number[]; b: number[] };
+  curves: { r: number[]; g: number[]; b: number[]; master?: number[] };
   hsl: { h: number; s: number; l: number };
   toneMapping: number;
   vignette: number;

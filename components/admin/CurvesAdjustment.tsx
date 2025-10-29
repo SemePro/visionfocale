@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { 
   TrendingUp, 
   Palette, 
@@ -45,11 +45,7 @@ const CurvesAdjustment: React.FC<CurvesAdjustmentProps> = ({
     { id: 'b', label: 'Bleu', color: '#0000ff' }
   ];
 
-  useEffect(() => {
-    drawCurves();
-  }, [curves, activeChannel]);
-
-  const drawCurves = () => {
+  const drawCurves = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -110,7 +106,11 @@ const CurvesAdjustment: React.FC<CurvesAdjustmentProps> = ({
       ctx.arc(x, y, 4, 0, 2 * Math.PI);
       ctx.fill();
     });
-  };
+  }, [curves, activeChannel]);
+
+  useEffect(() => {
+    drawCurves();
+  }, [drawCurves]);
 
   const drawCurve = (ctx: CanvasRenderingContext2D, points: number[], color: string, width: number, height: number) => {
     ctx.strokeStyle = color;
