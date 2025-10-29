@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Photo Editor Styles */
+@import '../styles/photo-editor.css';
+
 @layer base {
   * {
     @apply border-neutral-200;

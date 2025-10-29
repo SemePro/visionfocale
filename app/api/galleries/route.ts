@@ -108,10 +108,14 @@ export async function POST(request: NextRequest) {
       status: 'active',
     });
 
+    // Utiliser l'URL de base automatiquement
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 
+                   (typeof window !== 'undefined' ? window.location.origin : 'https://visionfocale.vercel.app');
+
     return NextResponse.json({
       success: true,
       data: gallery,
-      shareUrl: `${process.env.NEXT_PUBLIC_APP_URL}/galerie-client/${shareLink}`,
+      shareUrl: `${baseUrl}/galerie-client/${shareLink}`,
     }, { status: 201 });
   } catch (error: any) {
     console.error('Erreur POST /api/galleries:', error);

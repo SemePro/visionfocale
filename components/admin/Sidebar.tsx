@@ -21,6 +21,8 @@ import {
   Briefcase,
   Mail,
   Shield,
+  Palette,
+  Video,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -37,6 +39,8 @@ const getMenuItems = (userRole: string) => [
       { icon: Images, label: 'Galeries Clients', path: '/admin/galeries' },
       { icon: Users, label: 'Clients', path: '/admin/clients' },
       { icon: ImagePlus, label: 'Galerie Publique', path: '/admin/galerie-publique' },
+      { icon: Palette, label: 'Éditeur Photo', path: '/admin/editeur-photo' },
+      { icon: Video, label: 'Éditeur Vidéo', path: '/admin/editeur-video', disabled: true },
     ],
   },
   {
@@ -189,15 +193,24 @@ export default function Sidebar() {
                     {section.items.map((item) => {
                       const Icon = item.icon;
                       const active = isActive(item.path);
+                      const disabled = item.disabled || false;
 
                       return (
                         <Link
                           key={item.path}
-                          href={item.path}
-                          onClick={() => setIsMobileOpen(false)}
+                          href={disabled ? '#' : item.path}
+                          onClick={(e) => {
+                            if (disabled) {
+                              e.preventDefault();
+                              return;
+                            }
+                            setIsMobileOpen(false);
+                          }}
                           className={cn(
                             'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200',
-                            active
+                            disabled
+                              ? 'text-neutral-400 cursor-not-allowed opacity-50'
+                              : active
                               ? 'bg-primary-50 text-primary-600 font-medium'
                               : 'text-neutral-700 hover:bg-neutral-100'
                           )}
